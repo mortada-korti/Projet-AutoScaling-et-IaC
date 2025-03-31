@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-react
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-react
+  template:
+    metadata:
+      labels:
+        app: redis-react
+    spec:
+      containers:
+        - name: redis-react
+          image: mortada99/redis-react-img
+          imagePullPolicy: Always  
+          ports:
+            - containerPort: 8080

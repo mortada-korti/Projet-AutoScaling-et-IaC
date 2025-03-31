@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-node
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: redis-node
+  template:
+    metadata:
+      labels:
+        app: redis-node
+    spec:
+      containers:
+        - name: redis-node
+          image: mortada99/redis-node-img  # <- image depuis Docker Hub
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: REDIS_URL
+              value: redis://redis-master:6379
+            - name: REDIS_REPLICAS_URL
+              value: redis://redis-replica:6379
+          resources: 
+            requests: 
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "250m"
