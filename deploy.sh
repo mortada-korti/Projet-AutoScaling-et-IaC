@@ -1,5 +1,14 @@
 #!/bin/bash
 
+#!/bin/bash
+
+# ✅ Vérification que le script est exécuté en tant que root
+if [[ "$EUID" -ne 0 ]]; then
+  echo "❌ Ce script doit être exécuté en tant que root. Veuillez utiliser sudo ou passer en mode root."
+  exit 1
+fi
+
+
 set -e  # Arrêter le script en cas d'erreur
 
 ## 📌 Vérification des dépendances
@@ -102,12 +111,55 @@ echo "---------------------------------------------------------"
 
 
 echo "🕒 Veuillez patienter pendant le déploiement des pods..."
+echo ""
+
+kubectl get pods
+
+echo "---------------------------------------------------------"
+echo "🔄 Vérification en cours..."
+echo ""
+
+# Fonction de vérification
+wait_for_pods_ready() {
+  while true; do
+    NOT_READY=$(kubectl get pods --no-headers | awk '{print $2}' | grep -v '1/1' || true)
+    if [[ -z "$NOT_READY" ]]; then
+      break
+    fi
+    sleep 2
+  done
+}
+
+# Exécution de l'attente
+wait_for_pods_ready
+
+## ✅ Résumé de l'état
 echo "------------------------------------------"
-echo "⌛ Surveillance en temps réel :"
-
-kubectl get pods --watch &
-
+echo "📦 Pods déployés :"
+kubectl get pods
 echo ""
-echo "🟢 Dès que tous les pods sont en état 'Running' (1/1), vous pouvez lancer :"
-echo "    ./check-status.sh"
+echo "---------------------------------------------------------"
+echo "✅ Tous les pods sont en état RUNNING (1/1) !"
+
+echo "🛰️ Services exposés :"
+kubectl get services
 echo ""
+
+echo "📈 HPA (autoscaling) actifs :"
+kubectl get hpa
+echo ""
+
+## 🌐 URLs d'accès via Minikube
+echo "🌐 Accès aux services via NodePort :"
+echo "------------------------------------------"
+echo "🖥️ Frontend React   → $(minikube service redis-react --url)"
+echo "🧩 Backend Node      → $(minikube service redis-node --url)"
+echo "📈 Prometheus        → $(minikube service prometheus --url)"
+echo "📊 Grafana           → $(minikube service grafana --url)"
+echo ""
+echo "ℹ️  Pour vous connecter à Grafana, utilisez :"
+echo "   - identifiant : admin"
+echo "   - mot de passe : admin"
+echo ""
+
+echo "🎉 Déploiement terminé avec succès ! Vous pouvez maintenant accéder aux services depuis votre navigateur."

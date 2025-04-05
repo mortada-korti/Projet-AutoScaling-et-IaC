@@ -37,4 +37,9 @@ echo "🧹 Suppression de Redis Master..."
 kubectl delete -f k8s/redis/redis-master-service.yaml || true
 kubectl delete -f k8s/redis/redis-master-deployment.yaml || true
 
+echo "🧹 Suppression de Redis Master..."
+
+minikube stop
+minikube delete
+
 echo "✅ Suppression terminée avec succès."
