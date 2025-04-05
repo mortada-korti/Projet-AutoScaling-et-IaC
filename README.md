@@ -92,8 +92,13 @@ Après exécution du script `deploy.sh`, les adresses suivantes sont affichées 
 
 Nous avons fourni deux scripts pour tester la montée en charge de manière simple :
 
-- `load-db.sh` : Simule une lecture massive dans Redis.
-- `load-backend.sh` : Envoie des requêtes HTTP continues vers le backend.
+- `stress-db.sh` : Simule une lecture massive dans Redis.
+- `stress-backend.sh` : Envoie des requêtes HTTP continues vers le backend.
+
+```bash
+sudo ./stress-db.sh
+sudo ./stress-backend.sh
+```
 
 Arrêtez les scripts avec `Ctrl + C`.
 
