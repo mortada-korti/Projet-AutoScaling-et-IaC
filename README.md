@@ -46,7 +46,6 @@ Avant de lancer le projet, vous devez avoir :
 - Docker
 - kubectl
 - minikube
-- Un compte DockerHub (si vous voulez pusher les images)
 
 ---
 
