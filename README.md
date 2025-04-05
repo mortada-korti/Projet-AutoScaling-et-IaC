@@ -19,7 +19,9 @@ Projet-AutoScaling-et-IaC/
 │       ├── prometheus/
 │       └── grafana/
 ├── deploy.sh  
-├── destroy.sh                 
+├── destroy.sh    
+├── stress-backend.sh
+├── stress-db.sh             
 └── README.md
 ```
 
@@ -86,21 +88,23 @@ Après exécution du script `deploy.sh`, les adresses suivantes sont affichées 
 
 ---
 
+## 🔬 Tests d'auto-scalabilité
+
+Nous avons fourni deux scripts pour tester la montée en charge de manière simple :
+
+- `load-db.sh` : Simule une lecture massive dans Redis.
+- `load-backend.sh` : Envoie des requêtes HTTP continues vers le backend.
+
+Arrêtez les scripts avec `Ctrl + C`.
+
+---
+
 ### 📌 Objectifs du projet
 
 - Mettre en œuvre l’**Infrastructure as Code**
 - Déployer une architecture microservices avec **Kubernetes**
 - Intégrer un système de **monitoring et de visualisation**
 - Implémenter le **scaling automatique** des pods
-
----
-
-### 🎓 Ce que nous avons appris
-
-- Mise en place d’un environnement de production avec Kubernetes
-- Écriture de manifestes YAML
-- Création de dashboards personnalisés dans Grafana
-- Utilisation de requêtes **PromQL**
 
 ---
 
