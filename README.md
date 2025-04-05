@@ -53,6 +53,10 @@ Avant de lancer le projet, vous devez avoir :
 ### ▶️ Lancer le projet
 
 ```bash
+# ✅ Si vous êtes déjà en tant que root :
+./deploy.sh
+
+# ✅ Sinon, avec sudo :
 sudo ./deploy.sh
 ```
 
