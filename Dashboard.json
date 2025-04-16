@@ -1,0 +1,701 @@
+{
+
+  "annotations": {
+
+    "list": [
+
+      {
+
+        "builtIn": 1,
+
+        "datasource": {
+
+          "type": "grafana",
+
+          "uid": "-- Grafana --"
+
+        },
+
+        "enable": true,
+
+        "hide": true,
+
+        "iconColor": "rgba(0, 211, 255, 1)",
+
+        "name": "Annotations & Alerts",
+
+        "type": "dashboard"
+
+      }
+
+    ]
+
+  },
+
+  "editable": true,
+
+  "fiscalYearStartMonth": 0,
+
+  "graphTooltip": 0,
+
+  "id": 1,
+
+  "links": [],
+
+  "panels": [
+
+    {
+
+      "datasource": {
+
+        "type": "prometheus",
+
+        "uid": "cej3c0vkwhwqoe"
+
+      },
+
+      "fieldConfig": {
+
+        "defaults": {
+
+          "color": {
+
+            "mode": "palette-classic"
+
+          },
+
+          "custom": {
+
+            "axisBorderShow": false,
+
+            "axisCenteredZero": false,
+
+            "axisColorMode": "text",
+
+            "axisLabel": "",
+
+            "axisPlacement": "auto",
+
+            "barAlignment": 0,
+
+            "barWidthFactor": 0.6,
+
+            "drawStyle": "line",
+
+            "fillOpacity": 15,
+
+            "gradientMode": "none",
+
+            "hideFrom": {
+
+              "legend": false,
+
+              "tooltip": false,
+
+              "viz": false
+
+            },
+
+            "insertNulls": false,
+
+            "lineInterpolation": "linear",
+
+            "lineStyle": {
+
+              "fill": "solid"
+
+            },
+
+            "lineWidth": 1,
+
+            "pointSize": 4,
+
+            "scaleDistribution": {
+
+              "type": "linear"
+
+            },
+
+            "showPoints": "always",
+
+            "spanNulls": true,
+
+            "stacking": {
+
+              "group": "A",
+
+              "mode": "none"
+
+            },
+
+            "thresholdsStyle": {
+
+              "mode": "off"
+
+            }
+
+          },
+
+          "fieldMinMax": false,
+
+          "mappings": [],
+
+          "max": 100,
+
+          "min": 0,
+
+          "thresholds": {
+
+            "mode": "absolute",
+
+            "steps": [
+
+              {
+
+                "color": "green"
+
+              },
+
+              {
+
+                "color": "red",
+
+                "value": 80
+
+              }
+
+            ]
+
+          }
+
+        },
+
+        "overrides": [
+
+          {
+
+            "__systemRef": "hideSeriesFrom",
+
+            "matcher": {
+
+              "id": "byNames",
+
+              "options": {
+
+                "mode": "exclude",
+
+                "names": [
+
+                  "{instance=\"redis-node:8080\", job=\"redis-node\", method=\"GET\", route=\"/\", status=\"2XX\"}"
+
+                ],
+
+                "prefix": "All except:",
+
+                "readOnly": true
+
+              }
+
+            },
+
+            "properties": [
+
+              {
+
+                "id": "custom.hideFrom",
+
+                "value": {
+
+                  "legend": false,
+
+                  "tooltip": false,
+
+                  "viz": true
+
+                }
+
+              }
+
+            ]
+
+          }
+
+        ]
+
+      },
+
+      "gridPos": {
+
+        "h": 8,
+
+        "w": 12,
+
+        "x": 0,
+
+        "y": 0
+
+      },
+
+      "id": 1,
+
+      "options": {
+
+        "legend": {
+
+          "calcs": [],
+
+          "displayMode": "list",
+
+          "placement": "bottom",
+
+          "showLegend": true
+
+        },
+
+        "tooltip": {
+
+          "hideZeros": false,
+
+          "mode": "single",
+
+          "sort": "none"
+
+        }
+
+      },
+
+      "pluginVersion": "11.6.0",
+
+      "targets": [
+
+        {
+
+          "datasource": {
+
+            "type": "prometheus",
+
+            "uid": "dej08s9v8gkjkf"
+
+          },
+
+          "editorMode": "code",
+
+          "expr": "rate(process_cpu_seconds_total{job=\"redis-node\"}[1m])",
+
+          "hide": false,
+
+          "legendFormat": "__auto",
+
+          "range": true,
+
+          "refId": "A"
+
+        },
+
+        {
+
+          "datasource": {
+
+            "type": "prometheus",
+
+            "uid": "cej3c0vkwhwqoe"
+
+          },
+
+          "editorMode": "code",
+
+          "expr": "rate(http_requests_total[1m])",
+
+          "hide": true,
+
+          "instant": false,
+
+          "legendFormat": "__auto",
+
+          "range": true,
+
+          "refId": "B"
+
+        },
+
+        {
+
+          "datasource": {
+
+            "type": "prometheus",
+
+            "uid": "cej3c0vkwhwqoe"
+
+          },
+
+          "editorMode": "code",
+
+          "expr": "rate(http_requests_total{method=\"GET\", route=\"/\", status=\"2XX\"}[1m])",
+
+          "hide": true,
+
+          "instant": false,
+
+          "legendFormat": "__auto",
+
+          "range": true,
+
+          "refId": "C"
+
+        },
+
+        {
+
+          "datasource": {
+
+            "type": "prometheus",
+
+            "uid": "cej3c0vkwhwqoe"
+
+          },
+
+          "editorMode": "code",
+
+          "expr": "kube_deployment_status_replicas{deployment=\"redis-node\"}",
+
+          "hide": true,
+
+          "instant": false,
+
+          "legendFormat": "__auto",
+
+          "range": true,
+
+          "refId": "D"
+
+        },
+
+        {
+
+          "datasource": {
+
+            "type": "prometheus",
+
+            "uid": "cej3c0vkwhwqoe"
+
+          },
+
+          "editorMode": "code",
+
+          "expr": "kube_deployment_status_replicas{deployment=\"redis-replica\"}",
+
+          "hide": true,
+
+          "instant": false,
+
+          "legendFormat": "__auto",
+
+          "range": true,
+
+          "refId": "E"
+
+        },
+
+        {
+
+          "datasource": {
+
+            "type": "prometheus",
+
+            "uid": "cej3c0vkwhwqoe"
+
+          },
+
+          "editorMode": "code",
+
+          "expr": "kube_horizontalpodautoscaler_spec_min_replicas{horizontalpodautoscaler=\"redis-node-hpa\"}",
+
+          "hide": true,
+
+          "instant": false,
+
+          "legendFormat": "__auto",
+
+          "range": true,
+
+          "refId": "F"
+
+        },
+
+        {
+
+          "datasource": {
+
+            "type": "prometheus",
+
+            "uid": "cej3c0vkwhwqoe"
+
+          },
+
+          "editorMode": "code",
+
+          "expr": "kube_horizontalpodautoscaler_spec_max_replicas{horizontalpodautoscaler=\"redis-node-hpa\"}",
+
+          "hide": true,
+
+          "instant": false,
+
+          "legendFormat": "__auto",
+
+          "range": true,
+
+          "refId": "G"
+
+        },
+
+        {
+
+          "datasource": {
+
+            "type": "prometheus",
+
+            "uid": "cej3c0vkwhwqoe"
+
+          },
+
+          "editorMode": "code",
+
+          "expr": "kube_horizontalpodautoscaler_status_current_replicas{horizontalpodautoscaler=\"redis-node-hpa\"}",
+
+          "hide": true,
+
+          "instant": false,
+
+          "legendFormat": "__auto",
+
+          "range": true,
+
+          "refId": "H"
+
+        },
+
+        {
+
+          "datasource": {
+
+            "type": "prometheus",
+
+            "uid": "cej3c0vkwhwqoe"
+
+          },
+
+          "editorMode": "code",
+
+          "expr": "kube_horizontalpodautoscaler_spec_min_replicas{horizontalpodautoscaler=\"redis-replica-hpa\"}",
+
+          "hide": true,
+
+          "instant": false,
+
+          "legendFormat": "__auto",
+
+          "range": true,
+
+          "refId": "I"
+
+        },
+
+        {
+
+          "datasource": {
+
+            "type": "prometheus",
+
+            "uid": "cej3c0vkwhwqoe"
+
+          },
+
+          "editorMode": "code",
+
+          "expr": "kube_horizontalpodautoscaler_spec_max_replicas{horizontalpodautoscaler=\"redis-replica-hpa\"}",
+
+          "hide": true,
+
+          "instant": false,
+
+          "legendFormat": "__auto",
+
+          "range": true,
+
+          "refId": "J"
+
+        },
+
+        {
+
+          "datasource": {
+
+            "type": "prometheus",
+
+            "uid": "cej3c0vkwhwqoe"
+
+          },
+
+          "editorMode": "code",
+
+          "expr": "kube_horizontalpodautoscaler_status_current_replicas{horizontalpodautoscaler=\"redis-replica-hpa\"}",
+
+          "hide": true,
+
+          "instant": false,
+
+          "legendFormat": "__auto",
+
+          "range": true,
+
+          "refId": "K"
+
+        },
+
+        {
+
+          "datasource": {
+
+            "type": "prometheus",
+
+            "uid": "cej3c0vkwhwqoe"
+
+          },
+
+          "editorMode": "code",
+
+          "expr": "rate(http_requests_total{method=\"GET\", route=\"/item\", status=\"2XX\"}[1m])",
+
+          "hide": true,
+
+          "instant": false,
+
+          "legendFormat": "__auto",
+
+          "range": true,
+
+          "refId": "L"
+
+        },
+
+        {
+
+          "datasource": {
+
+            "type": "prometheus",
+
+            "uid": "cej3c0vkwhwqoe"
+
+          },
+
+          "editorMode": "code",
+
+          "expr": "rate(http_requests_total{method=\"POST\", route=\"/item\", status=\"2XX\"}[1m])",
+
+          "hide": true,
+
+          "instant": false,
+
+          "legendFormat": "__auto",
+
+          "range": true,
+
+          "refId": "M"
+
+        },
+
+        {
+
+          "datasource": {
+
+            "type": "prometheus",
+
+            "uid": "cej3c0vkwhwqoe"
+
+          },
+
+          "editorMode": "code",
+
+          "expr": "rate(http_request_duration_seconds_sum[1m])/rate(http_request_duration_seconds_count[1m])",
+
+          "hide": true,
+
+          "instant": false,
+
+          "legendFormat": "__auto",
+
+          "range": true,
+
+          "refId": "N"
+
+        },
+
+        {
+
+          "datasource": {
+
+            "type": "prometheus",
+
+            "uid": "cej3c0vkwhwqoe"
+
+          },
+
+          "editorMode": "code",
+
+          "expr": "process_resident_memory_bytes{job=\"redis-node\"}",
+
+          "hide": true,
+
+          "instant": false,
+
+          "legendFormat": "__auto",
+
+          "range": true,
+
+          "refId": "O"
+
+        }
+
+      ],
+
+      "title": "",
+
+      "type": "timeseries"
+
+    }
+
+  ],
+
+  "preload": false,
+
+  "refresh": "auto",
+
+  "schemaVersion": 41,
+
+  "tags": [],
+
+  "templating": {
+
+    "list": []
+
+  },
+
+  "time": {
+
+    "from": "now-5m",
+
+    "to": "now"
+
+  },
+
+  "timepicker": {},
+
+  "timezone": "browser",
+
+  "title": "Projet Observabilité",
+
+  "uid": "dej0b8nfqm9kwd",
+
+  "version": 1
+
+}

@@ -23,9 +23,9 @@ spec:
           args: ["--replicaof", "redis-master", "6379"]
           resources:
             requests:
-              cpu: "100m"
-              memory: "128Mi"
+              cpu: "10m"
+              memory: "12Mi"
             limits:
-              cpu: "250m"
-              memory: "256Mi"
+              cpu: "20m"
+              memory: "25Mi"
               
